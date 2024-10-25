@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<agendamentos>
+  <agendamento>
+    <nome>Nome Exemplo</nome>
+    <logradouro>Rua Exemplo, 123</logradouro>
+    <data>25/10/2024</data>
+  </agendamento>
+</agendamentos>
