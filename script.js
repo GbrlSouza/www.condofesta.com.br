@@ -1,7 +1,8 @@
-function loadAgendamentos() {
-  const agendamentos = JSON.parse(localStorage.getItem('agendamentos')) || [];
+async function loadAgendamentos() {
+  const response = await fetch('load_agendamentos.php');
+  const agendamentos = await response.json();
+  const agendaTable = document.getElementById("agenda");
 
-  const agendaTable = document.getElementById("agenda").getElementsByTagName('tbody')[0];
   agendamentos.forEach(agendamento => {
     const newRow = agendaTable.insertRow();
     newRow.insertCell(0).innerText = agendamento.nome;
@@ -18,7 +19,7 @@ document.getElementById("form-agendamento").addEventListener("submit", function 
   const dataOriginal = document.getElementById("data").value;
   const [ano, mes, dia] = dataOriginal.split("-");
   const dataFormatada = `${dia}/${mes}/${ano}`;
-  const agendaTable = document.getElementById("agenda").getElementsByTagName('tbody')[0];
+  const agendaTable = document.getElementById("agenda");
   const newRow = agendaTable.insertRow();
 
   newRow.insertCell(0).innerText = nome;
@@ -27,10 +28,17 @@ document.getElementById("form-agendamento").addEventListener("submit", function 
 
   document.getElementById("form-agendamento").reset();
 
-  const agendamentos = JSON.parse(localStorage.getItem('agendamentos')) || [];
-
-  agendamentos.push({ nome, logradouro, data: dataFormatada });
-  localStorage.setItem('agendamentos', JSON.stringify(agendamentos));
+  addAgendamentoToXML(nome, logradouro, dataFormatada);
 });
+
+function addAgendamentoToXML(nome, logradouro, data) {
+  fetch('add_agendamento.php', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ nome, logradouro, data })
+  });
+}
 
 window.onload = loadAgendamentos;
