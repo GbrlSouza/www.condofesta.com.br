@@ -61,27 +61,7 @@
       </table>
     </div>
   </main>
-  <script>
-    document.getElementById("form-agendamento").addEventListener("submit", function (event) {
-      event.preventDefault();
-
-      const nome = document.getElementById("nome").value;
-      const logradouro = document.getElementById("logradouro").value;
-      const dataOriginal = document.getElementById("data").value;
-
-      const [ano, mes, dia] = dataOriginal.split("-");
-      const dataFormatada = `${dia}/${mes}/${ano}`;
-
-      const agendaTable = document.getElementById("agenda");
-      const newRow = agendaTable.insertRow();
-      newRow.insertCell(0).innerText = nome;
-      newRow.insertCell(1).innerText = logradouro;
-      newRow.insertCell(2).innerText = dataFormatada;
-
-      document.getElementById("form-agendamento").reset();
-    });
-
-  </script>
+  <script src="./script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
